@@ -1,7 +1,12 @@
+import { Routing } from './routes/Routing'
+import './shared/global/style/Global.css'
+
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Routing>
+        <h1>lul?</h1>
+      </Routing>
     </div>
   );
 }
