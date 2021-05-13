@@ -1,7 +1,7 @@
-const episodesCatalogueView = '/catalogue'
-const episodeView = '/episode'
+const whosThatPokemonView = '/whosthatpokemon'
+const pokemonView = '/pokemon'
 
 export default {
-  episodesCatalogueView,
-  episodeView,
+  whosThatPokemonView,
+  pokemonView,
 }
