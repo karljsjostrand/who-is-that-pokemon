@@ -1,5 +1,21 @@
 body {
-  background-color: rgb(65, 88, 131);
-  color: rgb(194, 210, 240);
+  background-color: rgb(65, 170, 186);
+  color: rgb(207, 235, 231);
   text-align: center;
+}
+
+h1 {
+  color: rgb(255, 203, 5)
+}
+
+h2 {
+  color: rgb(255, 176, 0);
+}
+
+h3 {
+  color: rgb(255, 101, 25);
+}
+
+h4 {
+  color: rgb(255, 22, 5);
 }

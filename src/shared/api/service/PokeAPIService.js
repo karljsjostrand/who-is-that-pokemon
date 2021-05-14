@@ -5,17 +5,16 @@ const getPokemon = async (name) => {
 }
 
 const getRandomPokemon = async () => {
-  
+  return getPokemon(
+    randomPokemonId()
+  )
 }
 
-// const getPokemon = async (name) => {
-//   // const data = await fetch(`${PokeAPI.POKEMON}${name}`)
-//   const response = await fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur/')
-//   // const data = response.json()
-//   // console.log(data)
-//   return
-// }
+const randomPokemonId = (min = 1, max = 99) => {
+  return Math.round(Math.random() * (max - min) + min)
+}
 
 export default {
   getPokemon,
+  getRandomPokemon,
 }

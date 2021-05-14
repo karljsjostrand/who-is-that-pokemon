@@ -1,0 +1,47 @@
+img.who-is-it {
+  position: static;
+  cursor: pointer;
+  box-shadow: 0px 0px 100px rgb(207, 235, 231);
+  z-index: 10;
+}
+
+img.secret-pokemon {
+  position: relative;
+  top: -75%;
+  left: -22%;
+  cursor: help;
+  filter: grayscale(80%) blur(0px) drop-shadow(0px 0px 10px rgba(0, 0, 0, .5));
+  z-index: 20;
+}
+
+input.input-answer {
+  text-align: center;
+  width: 50%;
+  min-height: 30px;
+  border: none;
+  box-shadow: 0px 0px 5px rgb(207, 235, 231);
+  background-color: rgb(207, 235, 231);
+  color: rgb(255, 22, 5);
+  font-weight: 900;
+}
+
+div.whos-that-pokemon-container {
+  display: grid;
+  grid-template-rows: 2;
+  grid-template-areas: 
+    "secret-pokemon"
+    "input-answer";
+  justify-content: center;
+}
+
+div.secret-pokemon {
+  grid-area: "secret-pokemon";
+  width: 454px;
+  height: 340px;
+  padding: 20px;
+}
+
+div.input-answer {
+  justify-content: center;
+  grid-area: "input-answer";
+}

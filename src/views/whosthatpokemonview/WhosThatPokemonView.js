@@ -1,3 +1,4 @@
+import './WhosThatPokemonView.css'
 import { React, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import RoutingPaths from '../../routes/RoutingPaths'
@@ -7,25 +8,29 @@ import WhosThatPokemonImage from '../../shared/resources/images/whos-that-pokemo
 export const WhosThatPokemonView = () => {
   const history = useHistory()
   const [pokemon, setPokemon] = useState()
+  const [answer, setAnswer] = useState('')
 
   useEffect(() => {
-    const fetchPokemon = async (nameOrId) => {
-      const { data } = await PokeAPIService.getPokemon(nameOrId)
+    const fetchRandomPokemon = async () => {
+      const { data } = await PokeAPIService.getRandomPokemon()
       setPokemon(data)
     }
-    fetchPokemon(randomPokemonId())
+
+    fetchRandomPokemon()
   }, [])
 
-  const randomPokemonId = (min = 1, max = 99) => {
-    return Math.round(Math.random() * (max - min) + min)
+  const revealPokemon = () => {
+    history.push(RoutingPaths.pokemonView, { pokemon: pokemon , answer: answer})
   }
 
   return (
-    <div>
-      <button onClick={() => console.log(pokemon)}>log pokemon</button>
-      {/* <h1>{pokemon?.name?.charAt(0).toUpperCase() + pokemon?.name?.slice(1)}</h1> */}
-      <div>
-      <img src={WhosThatPokemonImage} alt={'whos that pokemon?'} onClick={() => history.push(RoutingPaths.pokemonView, { pokemon: pokemon })} />
+    <div className='whos-that-pokemon-container'>
+      <div className='secret-pokemon'>
+        <img className='who-is-it' src={WhosThatPokemonImage} alt={'whos that pokemon?'} onClick={() => revealPokemon()} />
+        <img className='secret-pokemon' src={pokemon?.sprites?.back_default} alt='pokemon sprite' onClick={() => revealPokemon()} />
+      </div>
+      <div className='input-answer'>
+        <input className='input-answer' placeholder='WHO&apos;S THAT POKEMON?' onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
       </div>
     </div>
   )
