@@ -1,20 +1,29 @@
 import PokeAPI from '../PokeAPI'
 
-const getPokemon = async (name) => {
-  return await PokeAPI.get(`pokemon/${name}/`)
+const getPokemon = (nameOrId) => {
+  try {
+    return PokeAPI.get(`pokemon/${nameOrId}/`)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-const getRandomPokemon = async () => {
-  return getPokemon(
-    randomPokemonId()
-  )
+const getAbility = (nameOrId) => {
+  try {
+    return PokeAPI.get(`ability/${nameOrId}/`)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-const randomPokemonId = (min = 1, max = 99) => {
-  return Math.round(Math.random() * (max - min) + min)
+// TODO count is a constant, 0 doesnt work, limits to 20 by default
+const getAllPokemon = () => {
+  const count = 1118
+  return PokeAPI.get(`pokemon/?limit=${count}`)
 }
 
 export default {
+  getAllPokemon,
+  getAbility,
   getPokemon,
-  getRandomPokemon,
 }
