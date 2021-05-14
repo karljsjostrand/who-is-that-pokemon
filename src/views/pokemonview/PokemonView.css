@@ -1,3 +1,8 @@
+div.pokemon-container {
+  display: flex;
+  justify-content: center;
+}
+
 img.whos-that-pokemon {
   position: fixed;
   top: 10px;
