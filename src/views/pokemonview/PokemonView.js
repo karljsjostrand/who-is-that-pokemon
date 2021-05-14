@@ -10,7 +10,7 @@ export const PokemonView = () => {
   const location = useLocation()
   const [answer, setAnswer] = useState('')
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
-  const [pokemon, setPokemon] = useState([])
+  const [pokemon, setPokemon] = useState()
 
   useEffect(() => {
     setPokemon(location.state.pokemon)
@@ -20,8 +20,20 @@ export const PokemonView = () => {
     console.log(location.state)
   }, [location.state])
 
+  const fetchAbilities = () => {
+
+  }
+
+  // Returns string with the first letter to upper case. Combined names have each - separated part capitalized.
+  const capitalizeName = (str) => {
+    if (!str) return undefined
+
+    let split = str.split(/(-)/g)
+    return split.map(str => str.charAt(0).toUpperCase() + str.slice(1))
+  }
+
   const displayAnswer = () => {
-    if (answer === '') 
+    if (!answer) 
       return
     else
       if (isCorrectAnswer)
@@ -34,11 +46,21 @@ export const PokemonView = () => {
         </div>
   }
 
+  const displayAbilities = () => {
+
+    return pokemon?.abilities?.map((abi, i) => <div key={i}>
+      <h3>{capitalizeName(abi.ability.name)}</h3>
+      <h4>ability text</h4>
+    </div>
+    )
+  }
+
   const displayPokemon = () => {
     return <div>
-      <h1>It's {pokemon?.name}!</h1>
+      <h1>It's {capitalizeName(pokemon?.name)}!</h1>
       <h2>Abilities</h2>
-      <img src={location.state.pokemon?.sprites?.front_default} alt='pokemon sprite' />
+      {displayAbilities()}
+      <img src={pokemon?.sprites?.front_default} alt='pokemon sprite' />
     </div>
   }
 

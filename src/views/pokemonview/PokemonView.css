@@ -1,19 +1,20 @@
 img.whos-that-pokemon {
   position: fixed;
-  top: 2vw;
-  left: 2vw;
+  top: 10px;
+  left: 10px;
 
   border-radius: 50%;
-  width: 8vw;
+  min-width: 100px;
+  max-width: 15vw;
   box-shadow: 0vw 0vw 5vw rgb(207, 235, 231);
 
   cursor: help;
 }
 
 h1.answer-correct {
-  color: green;
+  color: lightgreen;
 }
 
 h1.answer-not-correct {
-  color: red;
+  color: rgb(255, 22, 5);
 }
