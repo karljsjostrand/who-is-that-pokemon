@@ -30,7 +30,9 @@ export const WhosThatPokemonView = () => {
         <img className='secret-pokemon' src={pokemon?.sprites?.back_default} alt='pokemon sprite' onClick={() => revealPokemon()} />
       </div>
       <div className='input-answer'>
-        <input className='input-answer' placeholder='WHO&apos;S THAT POKEMON?' onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
+        <form onSubmit={() => revealPokemon()}>
+          <input className='input-answer' placeholder='WHO&apos;S THAT POKEMON?' onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
+        </form>
       </div>
     </div>
   )

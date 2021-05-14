@@ -36,7 +36,7 @@ export const PokemonView = () => {
 
   const displayPokemon = () => {
     return <div>
-      <h1>{pokemon?.name}</h1>
+      <h1>It's {pokemon?.name}!</h1>
       <h2>Abilities</h2>
       <img src={location.state.pokemon?.sprites?.front_default} alt='pokemon sprite' />
     </div>
