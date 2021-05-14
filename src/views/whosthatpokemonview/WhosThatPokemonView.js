@@ -34,6 +34,9 @@ export const WhosThatPokemonView = () => {
           <input className='input-answer' placeholder='WHO&apos;S THAT POKEMON?' onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
         </form>
       </div>
+      <div>
+        <iframe className='youtube-embed' width="280" height="157" src="https://www.youtube-nocookie.com/embed/gOLXYAlC-R8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   )
 }

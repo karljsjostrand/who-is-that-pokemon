@@ -46,9 +46,8 @@ div.input-answer {
   grid-area: "input-answer";
 }
 
-iframe.youtube {
+iframe.youtube-embed {
   position: absolute;
-  /* left: 1vw; */
   right: 1vw;
   bottom: 1vh;
 }
