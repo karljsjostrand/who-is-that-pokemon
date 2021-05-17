@@ -1,19 +1,15 @@
 div.pokemon-container {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
 }
 
 img.whos-that-pokemon {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-
+  margin-top: 6vh;
   border-radius: 50%;
-  min-width: 100px;
-  max-width: 15vw;
+  max-width: 256px;
   box-shadow: 0vw 0vw 5vw rgb(207, 235, 231);
 
-  cursor: help;
+  cursor: pointer;
 }
 
 h1.answer-correct {

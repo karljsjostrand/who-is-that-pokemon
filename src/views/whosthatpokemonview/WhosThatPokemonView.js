@@ -1,14 +1,16 @@
 import './WhosThatPokemonView.css'
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import RoutingPaths from '../../routes/RoutingPaths'
 import PokeAPIService from '../../shared/api/service/PokeAPIService'
-import WhosThatPokemonImage from '../../shared/resources/images/whos-that-pokemon.bmp'
-import PokeballImage from '../../shared/resources/images/pokeball.png'
+import { PokemonContext } from './../../shared/provider/PokemonProvider'
+
+import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
+import PokeballImg from '../../shared/resources/images/pokeball.png'
 
 export const WhosThatPokemonView = () => {
   const history = useHistory()
-  const [pokemon, setPokemon] = useState()
+  const [pokemon, setPokemon] = useContext(PokemonContext)
   const [answer, setAnswer] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
@@ -36,9 +38,9 @@ export const WhosThatPokemonView = () => {
     fetchRandomPokemon()
   }, [])
 
-  // Navigates user to pokemonView with pokemon and answer objects.
+  // Navigates to PokemonView with pokemon and answer objects.
   const revealPokemon = () => {
-    history.push(RoutingPaths.pokemonView, { pokemon: pokemon , answer: answer})
+    history.push(RoutingPaths.pokemonView, { answer: answer})
   }
 
   return (
@@ -46,15 +48,16 @@ export const WhosThatPokemonView = () => {
       <div className='secret-pokemon'>
         <img 
           className='who-is-it' 
-          src={WhosThatPokemonImage} 
-          alt={'whos that pokemon?'} 
+          src={WhosThatPokemonImg} 
+          alt='whos that pokemon?' 
           onClick={() => revealPokemon()} />
-        {/* load back sprite, if back is missing load front */}
+        {/* While pokemon is being fetched src spinner, otherwise src back facing sprite, if back is missing src front. */}
         <img 
-          className={isLoading ? 'secret-pokemon loading ' : 'secret-pokemon'}
-          src={isLoading ? PokeballImage 
-                         : pokemon?.sprites?.back_default ? pokemon?.sprites?.back_default : pokemon?.sprites?.front_default} 
-          alt='pokemon sprite error' 
+          className={isLoading ? 'secret-pokemon loading' : 'secret-pokemon'}
+          src={isLoading ? 
+           PokeballImg : pokemon?.sprites?.back_default ? 
+                           pokemon?.sprites?.back_default : pokemon?.sprites?.front_default} 
+          alt='pokemon sprite missing' 
           onClick={() => revealPokemon()} />
       </div>
       <div className='input-answer'>
@@ -65,9 +68,6 @@ export const WhosThatPokemonView = () => {
             onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
         </form>
       </div>
-      {/* <div>
-        <iframe className='youtube-embed' width="280" height="157" src="https://www.youtube-nocookie.com/embed/gOLXYAlC-R8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-      </div> */}
     </div>
   )
 }
