@@ -13,14 +13,13 @@ export const PokemonView = () => {
   const location = useLocation()
   const [answer, setAnswer] = useState('')
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
-  const [pokemon, setPokemon] = useContext(PokemonContext)
+  const [pokemon] = useContext(PokemonContext)
+  const [pokemonAbilities, setPokemonAbilities] = useState([])
 
   useEffect(() => {
     setAnswer(location.state.answer)
     location.state.answer === pokemon.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
-
-    console.log(location.state)
-  }, [location.state, pokemon.name])
+  }, [location.state.answer, pokemon.name])
 
   const fetchAbilities = () => {
 
@@ -70,8 +69,8 @@ export const PokemonView = () => {
   const displayPokemonAbilities = () => {
     return pokemon?.abilities?.map((abi, i) => <div key={i}>
       <h3>{capitalizeName(abi.ability.name)}</h3>
-      <h4>{abi.ability.url}</h4>
       {/* TODO ability info */}
+      <h4>{abi.ability.url}</h4>
       {/* {abi.ability = [...abi.ability, ]} */}
       {/* {fetchAbility(abi.ability.name)} */}
     </div>

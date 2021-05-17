@@ -6,7 +6,7 @@ div.pokemon-container {
 img.whos-that-pokemon {
   margin-top: 6vh;
   border-radius: 50%;
-  max-width: 256px;
+  max-width: 128px;
   box-shadow: 0vw 0vw 5vw rgb(207, 235, 231);
 
   cursor: pointer;

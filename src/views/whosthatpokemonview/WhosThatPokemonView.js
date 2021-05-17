@@ -36,7 +36,7 @@ export const WhosThatPokemonView = () => {
     }
 
     fetchRandomPokemon()
-  }, [])
+  }, [setPokemon])
 
   // Navigates to PokemonView with pokemon and answer objects.
   const revealPokemon = () => {
@@ -55,17 +55,22 @@ export const WhosThatPokemonView = () => {
         <img 
           className={isLoading ? 'secret-pokemon loading' : 'secret-pokemon'}
           src={isLoading ? 
-           PokeballImg : pokemon?.sprites?.back_default ? 
+             PokeballImg : pokemon?.sprites?.back_default ? 
                            pokemon?.sprites?.back_default : pokemon?.sprites?.front_default} 
           alt='pokemon sprite missing' 
           onClick={() => revealPokemon()} />
       </div>
       <div className='input-answer'>
         <form onSubmit={() => revealPokemon()}>
+          <h5>WHO&apos;S THAT POKEMON?</h5>
           <input 
-            className='input-answer' 
-            placeholder='WHO&apos;S THAT POKEMON?' 
+            className='answer' 
+            placeholder='It&apos;s ...' 
             onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
+            <input 
+              className='submit' 
+              type='submit' 
+              value='Answer'/>
         </form>
       </div>
     </div>

@@ -1,3 +1,7 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
   background-color: rgb(65, 170, 186);
   color: rgb(207, 235, 231);
