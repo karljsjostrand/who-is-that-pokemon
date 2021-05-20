@@ -5,7 +5,6 @@
 body {
   background-color: rgb(65, 170, 186);
   color: rgb(207, 235, 231);
-  text-align: center;
 }
 
 h1 {
@@ -19,11 +18,4 @@ h2 {
 
 h3 {
   color: rgb(255, 101, 25);
-}
-
-h4 {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  padding: 2px;
-  text-align: left;
 }

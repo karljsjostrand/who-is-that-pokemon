@@ -9,39 +9,34 @@ import PokeAPIService from '../../shared/api/service/PokeAPIService'
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
 
 export const PokemonView = () => {
+  const language = 'en'
   const history = useHistory()
   const location = useLocation()
   const [answer, setAnswer] = useState('')
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
   const [pokemon] = useContext(PokemonContext)
   const [pokemonAbilities, setPokemonAbilities] = useState([])
-  const language = 'en'
 
   useEffect(() => {
     const fetchAbility = async (name) => {
       const { data } = await PokeAPIService.getAbility(name)
-      
-      console.log(data.name)
 
-      let effect = undefined
+      let effect = 'Effect text missing...'
       data.effect_entries.forEach(effectEntry => {
         if (effectEntry.language.name === language) {
           effect = effectEntry.effect
         }
       });
-      // functional update - seems to work - though i now get a warning to use a useEffect cleanup function?
-      // TODO should i have a useEffect cleanup function?
       setPokemonAbilities(prevAbilities => [...prevAbilities, { name: data.name, effect: effect }]) 
     }
-    console.log(pokemon)
-
+    
     pokemon.abilities.forEach(abi => {
       fetchAbility(abi.ability.name)
     });
-
+    
     setAnswer(location.state.answer)
     location.state.answer === pokemon.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
-
+    
   }, [location.state.answer, pokemon])
 
   // Returns string with the first letter to upper case. Combined names have each (- separated) name capitalized.
@@ -74,9 +69,9 @@ export const PokemonView = () => {
 
   const displayPokemonAbilities = () => {
     return pokemonAbilities.map((ability, i) => 
-    <div key={i}>
+    <div className='pokemon-ability' key={i}>
       <h3>{capitalizeName(ability.name)}</h3>
-      <h4>{ability.effect}</h4>
+      <h4 className='pokemon-ability-effect'>{ability.effect}</h4>
     </div>)
   }
   

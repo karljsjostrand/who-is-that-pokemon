@@ -1,6 +1,7 @@
 div.pokemon-container {
   display: grid;
   justify-items: center;
+  text-align: center;
 }
 
 img.whos-that-pokemon {
@@ -18,4 +19,12 @@ h1.answer-correct {
 
 h1.answer-not-correct {
   color: rgb(255, 22, 5);
+}
+
+h4.pokemon-ability-effect {
+  max-width: 512px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 2px;
+  text-align: left;
 }
