@@ -38,7 +38,7 @@ export const WhosThatPokemonView = () => {
     fetchRandomPokemon()
   }, [setPokemon])
 
-  // Navigates to PokemonView with pokemon and answer objects.
+  // Navigates to PokemonView with answer.
   const revealPokemon = () => {
     history.push(RoutingPaths.pokemonView, { answer: answer})
   }
@@ -65,12 +65,12 @@ export const WhosThatPokemonView = () => {
           <h5>WHO&apos;S THAT POKEMON?</h5>
           <input 
             className='answer' 
-            placeholder='It&apos;s ...' 
+            placeholder='It&apos;s...' 
             onChange={(event) => setAnswer(event.target.value.toLowerCase())}></input>
-            <input 
-              className='submit' 
-              type='submit' 
-              value='Answer'/>
+          <input 
+            className='submit' 
+            type='submit' 
+            value='Answer'/>
         </form>
       </div>
     </div>

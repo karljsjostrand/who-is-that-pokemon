@@ -15,30 +15,36 @@ export const PokemonView = () => {
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
   const [pokemon] = useContext(PokemonContext)
   const [pokemonAbilities, setPokemonAbilities] = useState([])
+  const language = 'en'
 
   useEffect(() => {
+    const fetchAbility = async (name) => {
+      const { data } = await PokeAPIService.getAbility(name)
+      
+      console.log(data.name)
+
+      let effect = undefined
+      data.effect_entries.forEach(effectEntry => {
+        if (effectEntry.language.name === language) {
+          effect = effectEntry.effect
+        }
+      });
+      // functional update - seems to work - though i now get a warning to use a useEffect cleanup function?
+      // TODO should i have a useEffect cleanup function?
+      setPokemonAbilities(prevAbilities => [...prevAbilities, { name: data.name, effect: effect }]) 
+    }
+    console.log(pokemon)
+
+    pokemon.abilities.forEach(abi => {
+      fetchAbility(abi.ability.name)
+    });
+
     setAnswer(location.state.answer)
     location.state.answer === pokemon.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
-  }, [location.state.answer, pokemon.name])
 
-  const fetchAbilities = () => {
+  }, [location.state.answer, pokemon])
 
-  }
-
-  const fetchAbility = async (nameOrId) => {
-    const { data } = await PokeAPIService.getAbility(nameOrId)
-    const effect = await data.effect_entries[0].effect
-    console.log(effect)
-    return effect
-    // return data.effect_entries[0].effect.Promise.all()
-    // return data.effect_entries.map((element, i) => <div>
-    //   {/* <h5>{element.effect}</h5> */}
-    //   <h5>{i}</h5>
-    // </div>
-    // )
-  }
-
-  // Returns string with the first letter to upper case. Combined names have each - separated part capitalized.
+  // Returns string with the first letter to upper case. Combined names have each (- separated) name capitalized.
   const capitalizeName = (str) => {
     if (!str) return undefined
 
@@ -67,14 +73,11 @@ export const PokemonView = () => {
   }
 
   const displayPokemonAbilities = () => {
-    return pokemon?.abilities?.map((abi, i) => <div key={i}>
-      <h3>{capitalizeName(abi.ability.name)}</h3>
-      {/* TODO ability info */}
-      <h4>{abi.ability.url}</h4>
-      {/* {abi.ability = [...abi.ability, ]} */}
-      {/* {fetchAbility(abi.ability.name)} */}
-    </div>
-    )
+    return pokemonAbilities.map((ability, i) => 
+    <div key={i}>
+      <h3>{capitalizeName(ability.name)}</h3>
+      <h4>{ability.effect}</h4>
+    </div>)
   }
   
   return (
