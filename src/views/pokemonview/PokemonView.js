@@ -4,10 +4,11 @@ import { PokemonContext } from '../../shared/provider/PokemonProvider'
 import { useHistory, useLocation } from "react-router-dom";
 import RoutingPaths from '../../routes/RoutingPaths'
 import PokeAPIService from '../../shared/api/service/PokeAPIService'
+import { ScoreContext } from './../../shared/provider/ScoreProvider'
+import StringUtils from './../../utils/StringUtils'
 
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
 import LoadingImg from '../../shared/resources/images/pokeball.png'
-import { ScoreContext } from './../../shared/provider/ScoreProvider'
 
 export const PokemonView = () => {
   const language = 'en'
@@ -19,7 +20,7 @@ export const PokemonView = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { 
     correct: [correct, setCorrect], 
-    wrong: [wrong, setWrong], 
+    incorrect: [incorrect, setIncorrect], 
     skipped: [skipped, setSkipped] 
   } = useContext(ScoreContext)
 
@@ -27,13 +28,9 @@ export const PokemonView = () => {
     if (!pokemon) {
       history.push(RoutingPaths.whosThatPokemonView)
     }
-
-    fetchAbilities()
-    
     location.state.answer === pokemon?.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
-
+    fetchAbilities()
     updateScore()
-
   }, [])
 
   const fetchAbility = async (name) => {
@@ -67,15 +64,7 @@ export const PokemonView = () => {
       if (location.state.answer === pokemon?.name)
         setCorrect(correct + 1)
       else
-        setWrong(wrong + 1)
-  }
-
-  // Returns string with the first letter to upper case. Combined names have each (- separated) name capitalized.
-  const capitalizeName = (str) => {
-    if (!str) return undefined
-
-    let split = str.split(/(-)/g)
-    return split.map(str => str.charAt(0).toUpperCase() + str.slice(1))
+        setIncorrect(incorrect + 1)
   }
 
   // Displays whether the answer was correct or not. Displays nothing if answer was not attempted. 
@@ -91,7 +80,7 @@ export const PokemonView = () => {
 
   const displayPokemon = () => {
     return <div>
-      <h1>It's {capitalizeName(pokemon?.name)}!</h1>
+      <h1>It's {StringUtils.capitalizeName(pokemon?.name)}!</h1>
       <img src={pokemon?.sprites?.front_default} alt='pokemon sprite' />
       <h2>Abilities</h2>
       {isLoading ? displayLoading() : displayPokemonAbilities()}
@@ -101,7 +90,7 @@ export const PokemonView = () => {
   const displayPokemonAbilities = () => {
     return pokemonAbilities.map((ability, i) => 
     <div className='pokemon-ability' key={i}>
-      <h3>{capitalizeName(ability.name)}</h3>
+      <h3>{StringUtils.capitalizeName(ability.name)}</h3>
       <h4 className='pokemon-ability-effect'>{ability.effect}</h4>
     </div>
     )
