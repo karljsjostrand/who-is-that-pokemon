@@ -5,7 +5,7 @@ import { ScoreProvider } from './shared/provider/ScoreProvider'
 
 function App() {
   return (
-    <div>
+    <div className='app-container'>
       <ScoreProvider>  
         <PokemonProvider>
           <Routing>

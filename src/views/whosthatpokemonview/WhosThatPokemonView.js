@@ -8,6 +8,7 @@ import { ScoreBoard } from '../../components/scoreboard/ScoreBoard'
 
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
 import PokeballImg from '../../shared/resources/images/pokeball.png'
+import NumberUtils from '../../utils/NumberUtils'
 
 export const WhosThatPokemonView = () => {
   const history = useHistory()
@@ -15,18 +16,12 @@ export const WhosThatPokemonView = () => {
   const [answer, setAnswer] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
-  // Returns a random integer between 0 and max.
-  const getRandom = (max) => {
-    const min = 0
-    return Math.round(Math.random() * (max - min) + min)
-  }
-
   useEffect(() => {
     const fetchRandomPokemon = async () => {
       const response = await PokeAPIService.getAllPokemon()
   
       const max = response.data.count
-      const rnd = getRandom(max)
+      const rnd = NumberUtils.getRandomIntFromZeroTo(max)
   
       const randomPokemonName = response.data.results[rnd].name
       console.log(randomPokemonName)

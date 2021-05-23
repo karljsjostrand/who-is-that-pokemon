@@ -31,7 +31,7 @@ img.secret-pokemon {
   position: relative;
   top: -75%;
   left: -22%;
-  cursor: help;
+  cursor: pointer;
   filter: grayscale(80%) blur(0px) drop-shadow(0px 0px 10px rgba(0, 0, 0, .5));
   z-index: 20;
   max-height: 96px;
@@ -43,8 +43,8 @@ input {
   box-shadow: 0px 0px 5px rgb(207, 235, 231);
   background-color: rgb(207, 235, 231);
   border: none;
-  padding: 1vw;
-  margin: .5vw;
+  padding: 12px;
+  margin: 4px;
 }
 
 input.answer {
