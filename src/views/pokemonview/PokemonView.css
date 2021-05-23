@@ -4,6 +4,10 @@ div.pokemon-container {
   text-align: center;
 }
 
+.loading {
+  cursor: progress;
+}
+
 img.whos-that-pokemon {
   margin-top: 3vh;
   border-radius: 50%;
@@ -11,6 +15,10 @@ img.whos-that-pokemon {
   box-shadow: 0vw 0vw 5vw rgb(207, 235, 231);
 
   cursor: pointer;
+}
+
+img.loading {
+  width: 96px;
 }
 
 h1.answer-correct {
@@ -25,6 +33,6 @@ h4.pokemon-ability-effect {
   max-width: 512px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-  padding: 2px;
+  padding: 4px;
   text-align: left;
 }

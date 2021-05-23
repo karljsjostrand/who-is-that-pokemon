@@ -1,5 +1,4 @@
 import './PokemonView.css'
-import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import { PokemonContext } from '../../shared/provider/PokemonProvider'
 import { useHistory, useLocation } from "react-router-dom";
@@ -7,6 +6,8 @@ import RoutingPaths from '../../routes/RoutingPaths'
 import PokeAPIService from '../../shared/api/service/PokeAPIService'
 
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
+import LoadingImg from '../../shared/resources/images/pokeball.png'
+import { ScoreContext } from './../../shared/provider/ScoreProvider'
 
 export const PokemonView = () => {
   const language = 'en'
@@ -16,28 +17,59 @@ export const PokemonView = () => {
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
   const [pokemon] = useContext(PokemonContext)
   const [pokemonAbilities, setPokemonAbilities] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const { 
+    correct: [correct, setCorrect], 
+    wrong: [wrong, setWrong], 
+    skipped: [skipped, setSkipped] 
+  } = useContext(ScoreContext)
 
   useEffect(() => {
-    const fetchAbility = async (name) => {
-      const { data } = await PokeAPIService.getAbility(name)
-
-      let effect = 'Effect text missing...'
-      data.effect_entries.forEach(effectEntry => {
-        if (effectEntry.language.name === language) {
-          effect = effectEntry.effect
-        }
-      });
-      setPokemonAbilities(prevAbilities => [...prevAbilities, { name: data.name, effect: effect }]) 
+    if (!pokemon) {
+      history.push(RoutingPaths.whosThatPokemonView)
     }
+
+    fetchAbilities()
     
-    pokemon.abilities.forEach(abi => {
-      fetchAbility(abi.ability.name)
+    location.state.answer === pokemon?.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
+
+    updateScore()
+
+  }, [])
+
+  const fetchAbility = async (name) => {
+    const { data } = await PokeAPIService.getAbility(name)
+
+    let effect = 'Effect text missing...'
+    data.effect_entries.forEach(effectEntry => {
+      if (effectEntry.language.name === language) {
+        effect = effectEntry.effect
+      }
     });
-    
-    setAnswer(location.state.answer)
-    location.state.answer === pokemon.name ? setIsCorrectAnswer(true) : setIsCorrectAnswer(false)
-    
-  }, [location.state.answer, pokemon])
+    setPokemonAbilities(prevAbilities => [...prevAbilities, {name: data.name, effect: effect}])
+  }
+  
+  const fetchAbilities = () => {
+    try {
+      pokemon.abilities.forEach(abi => {
+        fetchAbility(abi.ability.name)
+      });
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const updateScore = () => {
+    if (!location.state.answer)
+      setSkipped(skipped + 1)
+    else
+      if (location.state.answer === pokemon?.name)
+        setCorrect(correct + 1)
+      else
+        setWrong(wrong + 1)
+  }
 
   // Returns string with the first letter to upper case. Combined names have each (- separated) name capitalized.
   const capitalizeName = (str) => {
@@ -49,7 +81,7 @@ export const PokemonView = () => {
 
   // Displays whether the answer was correct or not. Displays nothing if answer was not attempted. 
   const displayAnswer = () => {
-    if (!answer) 
+    if (!answer)
       return undefined
     else
       if (isCorrectAnswer)
@@ -63,7 +95,7 @@ export const PokemonView = () => {
       <h1>It's {capitalizeName(pokemon?.name)}!</h1>
       <img src={pokemon?.sprites?.front_default} alt='pokemon sprite' />
       <h2>Abilities</h2>
-      {displayPokemonAbilities()}
+      {isLoading ? displayLoading() : displayPokemonAbilities()}
     </div>
   }
 
@@ -72,7 +104,12 @@ export const PokemonView = () => {
     <div className='pokemon-ability' key={i}>
       <h3>{capitalizeName(ability.name)}</h3>
       <h4 className='pokemon-ability-effect'>{ability.effect}</h4>
-    </div>)
+    </div>
+    )
+  }
+
+  const displayLoading = () => {
+    return <img className='loading' width='48px' src={LoadingImg} alt='loading...' />
   }
   
   return (
