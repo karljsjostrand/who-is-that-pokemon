@@ -1,0 +1,47 @@
+div.score-container {
+  display: grid;
+  grid-template: 
+    "score-header score-header score-header"
+    "correct . score-correct"
+    "wrong . score-wrong"
+    "skipped . score-skipped";
+
+  border-radius: 4px;
+  margin: 32px;
+  text-align: center;
+  justify-self: center;
+    
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 160px;
+}
+
+.score-header {
+  grid-area: score-header;
+}
+
+.correct {
+  grid-area: correct;
+}
+
+.wrong {
+  grid-area: wrong;
+}
+
+.skipped {
+  grid-area: skipped;
+}
+
+.score-correct {
+  grid-area: score-correct;
+  color: lightgreen;
+}
+
+.score-wrong {
+  grid-area: score-wrong;
+  color: pink
+}
+
+.score-skipped {
+  grid-area: score-skipped;
+  color: yellow;
+}

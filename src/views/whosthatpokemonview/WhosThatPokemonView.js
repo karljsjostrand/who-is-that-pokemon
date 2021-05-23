@@ -1,9 +1,10 @@
 import './WhosThatPokemonView.css'
-import { React, useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import RoutingPaths from '../../routes/RoutingPaths'
 import PokeAPIService from '../../shared/api/service/PokeAPIService'
 import { PokemonContext } from './../../shared/provider/PokemonProvider'
+import { ScoreBoard } from '../../components/scoreboard/ScoreBoard'
 
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
 import PokeballImg from '../../shared/resources/images/pokeball.png'
@@ -40,11 +41,12 @@ export const WhosThatPokemonView = () => {
 
   // Navigates to PokemonView with answer.
   const revealPokemon = () => {
-    history.push(RoutingPaths.pokemonView, { answer: answer})
+    history.push(RoutingPaths.pokemonView, { answer: answer })
   }
 
   return (
     <div className='whos-that-pokemon-container'>
+      {/* TODO countdown timer before skip answer and view pokemon? */}
       <div className='secret-pokemon'>
         <img 
           className='who-is-it' 
@@ -73,6 +75,7 @@ export const WhosThatPokemonView = () => {
             value='Answer'/>
         </form>
       </div>
+      <ScoreBoard />
     </div>
   )
 }
