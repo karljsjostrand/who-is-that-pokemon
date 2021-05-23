@@ -3,7 +3,7 @@ div.score-container {
   grid-template: 
     "score-header score-header score-header"
     "correct . score-correct"
-    "wrong . score-wrong"
+    "incorrect . score-incorrect"
     "skipped . score-skipped";
 
   border-radius: 4px;
@@ -23,8 +23,8 @@ div.score-container {
   grid-area: correct;
 }
 
-.wrong {
-  grid-area: wrong;
+.incorrect {
+  grid-area: incorrect;
 }
 
 .skipped {
@@ -36,8 +36,8 @@ div.score-container {
   color: lightgreen;
 }
 
-.score-wrong {
-  grid-area: score-wrong;
+.score-incorrect {
+  grid-area: score-incorrect;
   color: pink
 }
 
