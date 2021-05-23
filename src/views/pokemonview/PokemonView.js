@@ -13,7 +13,6 @@ export const PokemonView = () => {
   const language = 'en'
   const history = useHistory()
   const location = useLocation()
-  const [answer, setAnswer] = useState('')
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false)
   const [pokemon] = useContext(PokemonContext)
   const [pokemonAbilities, setPokemonAbilities] = useState([])
@@ -81,7 +80,7 @@ export const PokemonView = () => {
 
   // Displays whether the answer was correct or not. Displays nothing if answer was not attempted. 
   const displayAnswer = () => {
-    if (!answer)
+    if (!location.state.answer)
       return undefined
     else
       if (isCorrectAnswer)
