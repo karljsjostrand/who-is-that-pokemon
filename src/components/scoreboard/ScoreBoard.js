@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { ScoreContext } from './../../shared/provider/ScoreProvider'
 
 export const ScoreBoard = () => {
-  const { correct:[correct], incorrect:[incorrect], skipped:[skipped] } = useContext(ScoreContext)
+  const { correct:[correct], incorrect:[incorrect], revealed:[revealed] } = useContext(ScoreContext)
 
   return (
     <div className='score-container'>
@@ -15,8 +15,8 @@ export const ScoreBoard = () => {
       <h5 className='incorrect'>Incorrect:</h5>
       <h3 className='score-incorrect'>{incorrect}</h3>
 
-      <h5 className='skipped'>Skipped:</h5>
-      <h3 className='score-skipped'>{skipped}</h3>
+      <h5 className='revealed'>Revealed:</h5>
+      <h3 className='score-revealed'>{revealed}</h3>
     </div>
   )
 }

@@ -4,7 +4,7 @@ div.score-container {
     "score-header score-header score-header"
     "correct . score-correct"
     "incorrect . score-incorrect"
-    "skipped . score-skipped";
+    "revealed . score-revealed";
 
   border-radius: 4px;
   margin: 32px;
@@ -27,8 +27,8 @@ div.score-container {
   grid-area: incorrect;
 }
 
-.skipped {
-  grid-area: skipped;
+.revealed {
+  grid-area: revealed;
 }
 
 .score-correct {
@@ -38,10 +38,10 @@ div.score-container {
 
 .score-incorrect {
   grid-area: score-incorrect;
-  color: pink
+  color: lightpink;
 }
 
-.score-skipped {
-  grid-area: score-skipped;
-  color: yellow;
+.score-revealed {
+  grid-area: score-revealed;
+  color: lightyellow;
 }

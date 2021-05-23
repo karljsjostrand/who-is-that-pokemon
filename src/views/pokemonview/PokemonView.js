@@ -21,7 +21,7 @@ export const PokemonView = () => {
   const { 
     correct: [correct, setCorrect], 
     incorrect: [incorrect, setIncorrect], 
-    skipped: [skipped, setSkipped] 
+    revealed: [revealed, setRevealed] 
   } = useContext(ScoreContext)
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const PokemonView = () => {
 
   const updateScore = () => {
     if (!location.state.answer)
-      setSkipped(skipped + 1)
+      setRevealed(revealed + 1)
     else
       if (location.state.answer === pokemon?.name)
         setCorrect(correct + 1)
@@ -86,6 +86,10 @@ export const PokemonView = () => {
       {isLoading ? displayLoading() : displayPokemonAbilities()}
     </div>
   }
+  
+  const displayLoading = () => {
+    return <img className='loading' width='48px' src={LoadingImg} alt='loading...' />
+  }
 
   const displayPokemonAbilities = () => {
     return pokemonAbilities.map((ability, i) => 
@@ -96,10 +100,6 @@ export const PokemonView = () => {
     )
   }
 
-  const displayLoading = () => {
-    return <img className='loading' width='48px' src={LoadingImg} alt='loading...' />
-  }
-  
   return (
     <div className='pokemon-container'>
       {displayAnswer()}

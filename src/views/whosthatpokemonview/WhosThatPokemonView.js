@@ -72,7 +72,7 @@ export const WhosThatPokemonView = () => {
           <input 
             className='submit' 
             type='submit' 
-            value='Answer'/>
+            value='Reveal'/>
         </form>
       </div>
       <ScoreBoard />
