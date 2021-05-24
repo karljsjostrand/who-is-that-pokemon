@@ -1,10 +1,18 @@
+:root {
+  --main-bg-color: rgb(65, 170, 186);
+  --main-font-color: rgb(207, 235, 231);
+  --score-correct-font-color: lightgreen;
+  --score-neutral-font-color: lightyellow;
+  --score-incorrect-font-color: lightpink;
+}
+
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: rgb(65, 170, 186);
-  color: rgb(207, 235, 231);
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
 }
 
 h1 {

@@ -37,17 +37,17 @@ div.score-container {
 .score-correct {
   text-align: left;
   grid-area: score-correct;
-  color: lightgreen;
+  color: var(--score-correct-font-color);
 }
 
 .score-incorrect {
   text-align: left;
   grid-area: score-incorrect;
-  color: lightpink;
+  color: var(--score-incorrect-font-color);
 }
 
 .score-revealed {
   text-align: left;
   grid-area: score-revealed;
-  color: lightyellow;
+  color: var(--score-neutral-font-color);
 }

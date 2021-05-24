@@ -22,7 +22,7 @@ div.input-answer {
 img.who-is-it {
   position: relative;
   cursor: pointer;
-  box-shadow: 0px 0px 100px rgb(207, 235, 231);
+  box-shadow: 0px 0px 100px var(--main-font-color);
   border-radius: 4px;
   z-index: 10;
 }
@@ -40,8 +40,8 @@ img.secret-pokemon {
 
 input {
   border-radius: 2px;
-  box-shadow: 0px 0px 5px rgb(207, 235, 231);
-  background-color: rgb(207, 235, 231);
+  box-shadow: 0px 0px 5px var(--main-font-color);
+  background-color: var(--main-font-color);
   border: none;
   padding: 12px;
   margin: 4px;

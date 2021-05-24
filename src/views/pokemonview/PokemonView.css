@@ -12,7 +12,7 @@ img.whos-that-pokemon {
   margin-top: 3vh;
   border-radius: 50%;
   max-width: 128px;
-  box-shadow: 0vw 0vw 5vw rgb(207, 235, 231);
+  box-shadow: 0vw 0vw 5vw var(--main-font-color);
 
   cursor: pointer;
 }
@@ -22,11 +22,11 @@ img.loading {
 }
 
 h1.answer-correct {
-  color: lightgreen;
+  color: var(--score-correct-font-color);
 }
 
 h1.answer-not-correct {
-  color: rgb(255, 22, 5);
+  color: var(--score-incorrect-font-color);
 }
 
 h4.pokemon-ability-effect {
