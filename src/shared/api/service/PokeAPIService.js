@@ -22,7 +22,7 @@ const getAllPokemon = () => {
   return PokeAPI.get(`pokemon/?limit=${count}`)
 }
 
-export default {
+export {
   getAllPokemon,
   getAbility,
   getPokemon,

@@ -1,7 +1,7 @@
 const whosThatPokemonView = '/whosthatpokemon'
 const pokemonView = '/pokemon'
 
-export default {
+export {
   whosThatPokemonView,
   pokemonView,
 }

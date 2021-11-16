@@ -1,14 +1,14 @@
 import './WhosThatPokemonView.css'
 import { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import RoutingPaths from '../../routes/RoutingPaths'
-import PokeAPIService from '../../shared/api/service/PokeAPIService'
+import { pokemonView } from '../../routes/RoutingPaths'
+import { getPokemon, getAllPokemon } from '../../shared/api/service/PokeAPIService'
 import { PokemonContext } from './../../shared/provider/PokemonProvider'
 import { ScoreBoard } from '../../components/scoreboard/ScoreBoard'
 
 import WhosThatPokemonImg from '../../shared/resources/images/whos-that-pokemon.bmp'
 import PokeballImg from '../../shared/resources/images/pokeball.png'
-import NumberUtils from '../../utils/NumberUtils'
+import { getRandomIntFromZeroTo } from '../../utils/NumberUtils'
 
 export const WhosThatPokemonView = () => {
   const history = useHistory()
@@ -18,15 +18,15 @@ export const WhosThatPokemonView = () => {
 
   useEffect(() => {
     const fetchRandomPokemon = async () => {
-      const response = await PokeAPIService.getAllPokemon()
+      const response = await getAllPokemon()
   
       const max = response.data.count
-      const rnd = NumberUtils.getRandomIntFromZeroTo(max)
+      const rnd = getRandomIntFromZeroTo(max)
   
       const randomPokemonName = response.data.results[rnd].name
       console.log(randomPokemonName)
   
-      const { data } = await PokeAPIService.getPokemon(randomPokemonName)
+      const { data } = await getPokemon(randomPokemonName)
       setPokemon(data)
       setIsLoading(false)
     }
@@ -36,7 +36,7 @@ export const WhosThatPokemonView = () => {
 
   // Navigates to PokemonView with answer.
   const revealPokemon = () => {
-    history.push(RoutingPaths.pokemonView, { answer: answer })
+    history.push(pokemonView, { answer: answer })
   }
 
   return (
